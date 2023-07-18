@@ -14,7 +14,7 @@
 
 ### Testing APIs with Swagger
 1. Open your preferred browser.
-2. Navigate to [http://localhost:5000/swagger](http://localhost:5000/swagger).
+2. Navigate to [https://localhost:7009/swagger](https://localhost:7009/swagger).
 
 ### Testing APIs with Postman/Insomnia
 POST https://localhost:7009/Employee
@@ -73,7 +73,7 @@ Response body:
 	"totalBenefitsCost": 1500,
 	"salary": 52000,
 	"discountedSalary": 50500,
-	"monthlySalary": 2000,
-	"monthlyDiscountedSalary": 1942.3076923076924
+	"basePaycheck": 2000,
+	"discountedPaycheck": 1942.3076923076924
 }
 ```

@@ -19,7 +19,7 @@ namespace EmployeeBenefitPackage.Services
             var baseSalary = paycheckValue * paychecksYear;
             var discountedSalary = baseSalary - totalBenefitsCost;
 
-            var monthlyDiscountedSalary = discountedSalary / paychecksYear;
+            var discountedPaycheck = discountedSalary / paychecksYear;
 
             return new BenefitsPackage
             {
@@ -27,8 +27,8 @@ namespace EmployeeBenefitPackage.Services
                 TotalBenefitsCost = totalBenefitsCost,
                 Salary = baseSalary,
                 DiscountedSalary = discountedSalary,
-                MonthlySalary = paycheckValue,
-                MonthlyDiscountedSalary = monthlyDiscountedSalary
+                BasePaycheck = paycheckValue,
+                DiscountedPaycheck = discountedPaycheck
             };
         }
 
@@ -57,7 +57,7 @@ namespace EmployeeBenefitPackage.Services
             return totalBenefitsCost;
         }
 
-        private bool HasNameDiscount(string name)
+        private static bool HasNameDiscount(string name)
         {
             return name.ToUpper().StartsWith('A');
         }
