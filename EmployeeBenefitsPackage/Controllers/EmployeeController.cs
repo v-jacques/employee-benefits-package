@@ -1,8 +1,8 @@
-﻿using EmployeeBenefitPackage.Models;
-using EmployeeBenefitPackage.Repositories;
+﻿using EmployeeBenefitsPackage.Models;
+using EmployeeBenefitsPackage.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeBenefitPackage.Controllers
+namespace EmployeeBenefitsPackage.Controllers
 {
     [ApiController]
     [Route("[controller]")]

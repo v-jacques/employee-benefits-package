@@ -1,6 +1,6 @@
-﻿using EmployeeBenefitPackage.Models;
+﻿using EmployeeBenefitsPackage.Models;
 
-namespace EmployeeBenefitPackage.Repositories
+namespace EmployeeBenefitsPackage.Repositories
 {
     public interface IDependentRepository
     {

@@ -1,6 +1,6 @@
-﻿using EmployeeBenefitPackage.Models;
+﻿using EmployeeBenefitsPackage.Models;
 
-namespace EmployeeBenefitPackage.Services
+namespace EmployeeBenefitsPackage.Services
 {
     public interface IBenefitsPackageService
     {

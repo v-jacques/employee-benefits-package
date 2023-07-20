@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "EmployeeBenefitPackage": {
+    "EmployeeBenefitsPackage": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

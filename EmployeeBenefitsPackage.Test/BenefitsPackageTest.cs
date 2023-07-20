@@ -1,8 +1,8 @@
-using EmployeeBenefitPackage.Models;
-using EmployeeBenefitPackage.Services;
+using EmployeeBenefitsPackage.Models;
+using EmployeeBenefitsPackage.Services;
 using Xunit;
 
-namespace EmployeeBenefitPackage.Test
+namespace EmployeeBenefitsPackage.Test
 {
     public class BenefitsPackageTest
     {

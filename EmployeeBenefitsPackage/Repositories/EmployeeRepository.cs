@@ -1,7 +1,7 @@
-﻿namespace EmployeeBenefitPackage.Repositories
+﻿namespace EmployeeBenefitsPackage.Repositories
 {
     using System.Linq;
-    using EmployeeBenefitPackage.Models;
+    using EmployeeBenefitsPackage.Models;
     using Microsoft.EntityFrameworkCore;
 
     public interface IEmployeeRepository

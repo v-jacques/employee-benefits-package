@@ -1,9 +1,9 @@
-﻿using EmployeeBenefitPackage.Models;
-using EmployeeBenefitPackage.Repositories;
-using EmployeeBenefitPackage.Services;
+﻿using EmployeeBenefitsPackage.Models;
+using EmployeeBenefitsPackage.Repositories;
+using EmployeeBenefitsPackage.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeBenefitPackage.Controllers
+namespace EmployeeBenefitsPackage.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -19,7 +19,7 @@ namespace EmployeeBenefitPackage.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BenefitsPackage> GetBenefitPackage(int employeeId)
+        public ActionResult<BenefitsPackage> GetBenefitsPackage(int employeeId)
         {
             var employee = _employeeRepository.GetEmployee(employeeId);
 

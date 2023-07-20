@@ -1,6 +1,6 @@
 ﻿using Swashbuckle.AspNetCore.Annotations;
 
-namespace EmployeeBenefitPackage.Models
+namespace EmployeeBenefitsPackage.Models
 {
     public class Employee
     {

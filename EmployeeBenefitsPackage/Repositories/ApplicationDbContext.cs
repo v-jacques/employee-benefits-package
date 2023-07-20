@@ -1,6 +1,6 @@
-﻿namespace EmployeeBenefitPackage.Repositories
+﻿namespace EmployeeBenefitsPackage.Repositories
 {
-    using EmployeeBenefitPackage.Models;
+    using EmployeeBenefitsPackage.Models;
     using Microsoft.EntityFrameworkCore;
 
     public class ApplicationDbContext : DbContext

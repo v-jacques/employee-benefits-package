@@ -1,4 +1,4 @@
-﻿namespace EmployeeBenefitPackage.Models
+﻿namespace EmployeeBenefitsPackage.Models
 {
     public class BenefitsPackage
     {
