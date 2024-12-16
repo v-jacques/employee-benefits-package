@@ -19,9 +19,9 @@ public class BenefitsPackageController : Controller
     }
 
     [HttpGet]
-    public ActionResult<BenefitsPackage> GetBenefitsPackage(int employeeId)
+    public async Task<ActionResult<BenefitsPackage>> GetBenefitsPackage(int employeeId)
     {
-        var employee = _employeeRepository.GetEmployee(employeeId);
+        var employee = await _employeeRepository.GetEmployee(employeeId);
 
         return _benefitsPackageService.CalculateBenefitsPackage(employee);
     }

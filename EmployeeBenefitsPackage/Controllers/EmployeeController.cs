@@ -16,16 +16,16 @@ public class EmployeeController : Controller
     }
 
     [HttpPost]
-    public ActionResult<Employee> AddEmployee(Employee employee)
+    public async Task<ActionResult<Employee>> AddEmployee(Employee employee)
     {
-        var emp = _employeeRepository.AddEmployee(employee);
+        var emp = await _employeeRepository.AddEmployee(employee);
 
         return emp;
     }
 
     [HttpGet]
-    public ActionResult<Employee> GetEmployee(int id)
+    public async Task<ActionResult<Employee>> GetEmployee(int id)
     {
-        return _employeeRepository.GetEmployee(id);
+        return await _employeeRepository.GetEmployee(id);
     }
 }

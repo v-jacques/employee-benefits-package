@@ -16,9 +16,9 @@ public class DependentController : Controller
     }
 
     [HttpPost]
-    public ActionResult<Dependent> AddDependent(Dependent dependent)
+    public async Task<ActionResult<Dependent>> AddDependent(Dependent dependent)
     {
-        var dep = _dependentRepository.AddDependent(dependent);
+        var dep = await _dependentRepository.AddDependent(dependent);
         
         return dep;
     }

@@ -1,32 +1,35 @@
 ﻿using EmployeeBenefitsPackage.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeBenefitsPackage.Repositories;
 
 public interface IDependentRepository
 {
-    Dependent AddDependent(Dependent dependent);
-    IEnumerable<Dependent> GetDependentsFromEmployee(Employee employee);
+    Task<Dependent> AddDependent(Dependent dependent);
+    Task<IEnumerable<Dependent>> GetEmployeeDependents(Employee employee);
 }
 
 public class DependentRepository : IDependentRepository
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext _dbContext;
 
-    public DependentRepository(ApplicationDbContext context)
+    public DependentRepository(ApplicationDbContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
-    public Dependent AddDependent(Dependent dependent)
+    public async Task<Dependent> AddDependent(Dependent dependent)
     {
-        var dep = _context.Dependents.Add(dependent);
-        _context.SaveChanges();
+        var dep = await _dbContext.Dependents.AddAsync(dependent);
+        await _dbContext.SaveChangesAsync();
 
         return dep.Entity;
     }
 
-    public IEnumerable<Dependent> GetDependentsFromEmployee(Employee employee)
+    public async Task<IEnumerable<Dependent>> GetEmployeeDependents(Employee employee)
     {
-        return _context.Dependents.Where(d => d.EmployeeId == employee.Id);
+        return await _dbContext.Dependents
+                             .Where(d => d.EmployeeId == employee.Id)
+                             .ToListAsync();
     }
 }
