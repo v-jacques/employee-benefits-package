@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeBenefitsPackage", "EmployeeBenefitsPackage/EmployeeBenefitsPackage.csproj", "{8EBA4D91-9341-4940-BA32-7F3920894458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeBenefitsPackage", "EmployeeBenefitsPackage\EmployeeBenefitsPackage.csproj", "{8EBA4D91-9341-4940-BA32-7F3920894458}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeBenefitsPackage.Test", "EmployeeBenefitsPackage.Test\EmployeeBenefitsPackage.Test.csproj", "{9C434264-310A-4767-925A-E631C581422C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeBenefitsPackage.Test", "EmployeeBenefitsPackage.Test\EmployeeBenefitsPackage.Test.csproj", "{9C434264-310A-4767-925A-E631C581422C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

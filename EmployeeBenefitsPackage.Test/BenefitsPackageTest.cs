@@ -2,78 +2,77 @@ using EmployeeBenefitsPackage.Models;
 using EmployeeBenefitsPackage.Services;
 using Xunit;
 
-namespace EmployeeBenefitsPackage.Test
+namespace EmployeeBenefitsPackage.Test;
+
+public class BenefitsPackageTest
 {
-    public class BenefitsPackageTest
+    private readonly BenefitsPackageService _benefitsPackageService;
+
+    public BenefitsPackageTest()
     {
-        private readonly BenefitsPackageService _benefitsPackageService;
+        _benefitsPackageService = new BenefitsPackageService();
+    }
 
-        public BenefitsPackageTest()
+    [Fact]
+    public void CalculateBenefitsPackage_EmployeeWithNoDependents()
+    {
+        var employee = new Employee
         {
-            _benefitsPackageService = new BenefitsPackageService();
-        }
+            Name = "Vinicius",
+        };
 
-        [Fact]
-        public void CalculateBenefitsPackage_EmployeeWithNoDependents()
+        var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
+
+        Assert.Equal(1000.0, benefitsCost.TotalBenefitsCost);
+        Assert.Equal(52000.0, benefitsCost.Salary);
+        Assert.Equal(51000.0, benefitsCost.DiscountedSalary);
+        Assert.Equal(2000.0, benefitsCost.BasePaycheck);
+        Assert.Equal(1961.5384615384614, benefitsCost.DiscountedPaycheck);
+    }
+
+    [Fact]
+    public void CalculateBenefitsPackage_EmployeeWithDependent()
+    {
+        var dependent = new Dependent
         {
-            var employee = new Employee
-            {
-                Name = "Vinicius",
-            };
+            Name = "Jacques"
+        };
 
-            var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
-
-            Assert.Equal(1000.0, benefitsCost.TotalBenefitsCost);
-            Assert.Equal(52000.0, benefitsCost.Salary);
-            Assert.Equal(51000.0, benefitsCost.DiscountedSalary);
-            Assert.Equal(2000.0, benefitsCost.BasePaycheck);
-            Assert.Equal(1961.5384615384614, benefitsCost.DiscountedPaycheck);
-        }
-
-        [Fact]
-        public void CalculateBenefitsPackage_EmployeeWithDependent()
+        var employee = new Employee
         {
-            var dependent = new Dependent
-            {
-                Name = "Jacques"
-            };
+            Name = "Vinicius",
+            Dependents = new List<Dependent> { dependent }
+        };
 
-            var employee = new Employee
-            {
-                Name = "Vinicius",
-                Dependents = new List<Dependent> { dependent }
-            };
+        var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
 
-            var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
+        Assert.Equal(1500.0, benefitsCost.TotalBenefitsCost);
+        Assert.Equal(52000.0, benefitsCost.Salary);
+        Assert.Equal(50500.0, benefitsCost.DiscountedSalary);
+        Assert.Equal(2000.0, benefitsCost.BasePaycheck);
+        Assert.Equal(1942.3076923076924, benefitsCost.DiscountedPaycheck);
+    }
 
-            Assert.Equal(1500.0, benefitsCost.TotalBenefitsCost);
-            Assert.Equal(52000.0, benefitsCost.Salary);
-            Assert.Equal(50500.0, benefitsCost.DiscountedSalary);
-            Assert.Equal(2000.0, benefitsCost.BasePaycheck);
-            Assert.Equal(1942.3076923076924, benefitsCost.DiscountedPaycheck);
-        }
-
-        [Fact]
-        public void CalculateBenefitsPackage_EmployeeWithDependentAndDiscounts()
+    [Fact]
+    public void CalculateBenefitsPackage_EmployeeWithDependentAndDiscounts()
+    {
+        var dependent = new Dependent
         {
-            var dependent = new Dependent
-            {
-                Name = "AJacques"
-            };
+            Name = "AJacques"
+        };
 
-            var employee = new Employee
-            {
-                Name = "AVinicius",
-                Dependents = new List<Dependent> { dependent }
-            };
+        var employee = new Employee
+        {
+            Name = "AVinicius",
+            Dependents = new List<Dependent> { dependent }
+        };
 
-            var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
+        var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
 
-            Assert.Equal(1350.0, benefitsCost.TotalBenefitsCost);
-            Assert.Equal(52000.0, benefitsCost.Salary);
-            Assert.Equal(50650.0, benefitsCost.DiscountedSalary);
-            Assert.Equal(2000.0, benefitsCost.BasePaycheck);
-            Assert.Equal(1948.0769230769231, benefitsCost.DiscountedPaycheck);
-        }
+        Assert.Equal(1350.0, benefitsCost.TotalBenefitsCost);
+        Assert.Equal(52000.0, benefitsCost.Salary);
+        Assert.Equal(50650.0, benefitsCost.DiscountedSalary);
+        Assert.Equal(2000.0, benefitsCost.BasePaycheck);
+        Assert.Equal(1948.0769230769231, benefitsCost.DiscountedPaycheck);
     }
 }

@@ -1,36 +1,33 @@
-﻿namespace EmployeeBenefitsPackage.Repositories
+﻿using EmployeeBenefitsPackage.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace EmployeeBenefitsPackage.Repositories;
+
+public interface IEmployeeRepository
 {
-    using System.Linq;
-    using EmployeeBenefitsPackage.Models;
-    using Microsoft.EntityFrameworkCore;
+    Employee AddEmployee(Employee employee);
+    Employee GetEmployee(int id);
+}
 
-    public interface IEmployeeRepository
+public class EmployeeRepository : IEmployeeRepository
+{
+    private readonly ApplicationDbContext _dbContext;
+
+    public EmployeeRepository(ApplicationDbContext dbContext)
     {
-        Employee AddEmployee(Employee employee);
-        Employee GetEmployee(int id);
+        _dbContext = dbContext;
     }
 
-    public class EmployeeRepository : IEmployeeRepository
+    public Employee AddEmployee(Employee employee)
     {
-        private readonly ApplicationDbContext _dbContext;
+        var emp = _dbContext.Employees.Add(employee);
+        _dbContext.SaveChanges();
 
-        public EmployeeRepository(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public Employee AddEmployee(Employee employee)
-        {
-            var emp = _dbContext.Employees.Add(employee);
-            _dbContext.SaveChanges();
-
-            return emp.Entity;
-        }
-
-        public Employee GetEmployee(int employeeId)
-        {
-            return _dbContext.Employees.Include(e => e.Dependents).SingleOrDefault(e => e.Id == employeeId);
-        }
+        return emp.Entity;
     }
 
+    public Employee GetEmployee(int employeeId)
+    {
+        return _dbContext.Employees.Include(e => e.Dependents).SingleOrDefault(e => e.Id == employeeId);
+    }
 }

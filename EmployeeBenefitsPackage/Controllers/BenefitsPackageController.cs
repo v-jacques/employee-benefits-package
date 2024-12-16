@@ -3,27 +3,26 @@ using EmployeeBenefitsPackage.Repositories;
 using EmployeeBenefitsPackage.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EmployeeBenefitsPackage.Controllers
+namespace EmployeeBenefitsPackage.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class BenefitsPackageController : Controller
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class BenefitsPackageController : Controller
+    private readonly IEmployeeRepository _employeeRepository;
+    private readonly IBenefitsPackageService _benefitsPackageService;
+
+    public BenefitsPackageController(IEmployeeRepository employeeRepository, IBenefitsPackageService benefitsPackageService)
     {
-        private readonly IEmployeeRepository _employeeRepository;
-        private readonly IBenefitsPackageService _benefitsPackageService;
+        _employeeRepository = employeeRepository;
+        _benefitsPackageService = benefitsPackageService;
+    }
 
-        public BenefitsPackageController(IEmployeeRepository employeeRepository, IBenefitsPackageService benefitsPackageService)
-        {
-            _employeeRepository = employeeRepository;
-            _benefitsPackageService = benefitsPackageService;
-        }
+    [HttpGet]
+    public ActionResult<BenefitsPackage> GetBenefitsPackage(int employeeId)
+    {
+        var employee = _employeeRepository.GetEmployee(employeeId);
 
-        [HttpGet]
-        public ActionResult<BenefitsPackage> GetBenefitsPackage(int employeeId)
-        {
-            var employee = _employeeRepository.GetEmployee(employeeId);
-
-            return _benefitsPackageService.CalculateBenefitsPackage(employee);
-        }
+        return _benefitsPackageService.CalculateBenefitsPackage(employee);
     }
 }
