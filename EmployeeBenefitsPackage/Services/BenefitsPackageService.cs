@@ -15,10 +15,8 @@ public class BenefitsPackageService : IBenefitsPackageService
         const int paychecksYear = 26;
 
         var totalBenefitsCost = CalculateBenefitsPackageCost(employee);
-
         var baseSalary = paycheckValue * paychecksYear;
         var discountedSalary = baseSalary - totalBenefitsCost;
-
         var discountedPaycheck = discountedSalary / paychecksYear;
 
         return new BenefitsPackage
@@ -32,29 +30,25 @@ public class BenefitsPackageService : IBenefitsPackageService
         };
     }
 
-    private double CalculateBenefitsPackageCost(Employee employee)
+    private static double CalculateBenefitsPackageCost(Employee employee)
     {
         const double baseEmployeeCost = 1000;
         const double baseDependentCost = 500;
         const double discount = 0.9;
 
         var dependentsCost = 0.0;
-        if (employee.Dependents != null)
-        {
-            foreach (var dependent in employee.Dependents)
-            {
-                if (HasNameDiscount(dependent.Name))
-                    dependentsCost += baseDependentCost * discount;
-                else
-                    dependentsCost += baseDependentCost;
-            }
-        }
 
-        var employeeCost = HasNameDiscount(employee.Name) ? baseEmployeeCost * discount : baseEmployeeCost;
+        foreach (var dependent in employee.Dependents)
+            dependentsCost += HasNameDiscount(dependent.Name)
+                ? baseDependentCost * discount
+                : baseDependentCost;
 
-        var totalBenefitsCost = dependentsCost + employeeCost;
+        var employeeCost =
+            HasNameDiscount(employee.Name)
+                ? baseEmployeeCost * discount
+                : baseEmployeeCost;
 
-        return totalBenefitsCost;
+        return dependentsCost + employeeCost;
     }
 
     private static bool HasNameDiscount(string name)

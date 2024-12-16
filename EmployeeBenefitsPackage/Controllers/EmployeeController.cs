@@ -6,7 +6,7 @@ namespace EmployeeBenefitsPackage.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class EmployeeController : Controller
+public class EmployeeController : ControllerBase
 {
     private readonly IEmployeeRepository _employeeRepository;
 

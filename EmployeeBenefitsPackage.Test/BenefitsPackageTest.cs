@@ -18,6 +18,7 @@ public class BenefitsPackageTest
         var employee = new Employee
         {
             Name = "Vinicius",
+            Dependents = []
         };
 
         var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
@@ -32,15 +33,15 @@ public class BenefitsPackageTest
     [Fact]
     public void CalculateBenefitsPackage_EmployeeWithDependent()
     {
-        var dependent = new Dependent
-        {
-            Name = "Jacques"
-        };
-
         var employee = new Employee
         {
             Name = "Vinicius",
-            Dependents = new List<Dependent> { dependent }
+            Dependents = [
+                new Dependent
+                {
+                    Name = "Jacques"
+                }
+            ]
         };
 
         var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
@@ -55,15 +56,15 @@ public class BenefitsPackageTest
     [Fact]
     public void CalculateBenefitsPackage_EmployeeWithDependentAndDiscounts()
     {
-        var dependent = new Dependent
-        {
-            Name = "AJacques"
-        };
-
         var employee = new Employee
         {
             Name = "AVinicius",
-            Dependents = new List<Dependent> { dependent }
+            Dependents = [
+                new Dependent
+                {
+                    Name = "AJacques"
+                }
+            ]
         };
 
         var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);

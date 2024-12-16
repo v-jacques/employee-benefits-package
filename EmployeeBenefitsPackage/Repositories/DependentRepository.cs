@@ -29,7 +29,7 @@ public class DependentRepository : IDependentRepository
     public async Task<IEnumerable<Dependent>> GetEmployeeDependents(Employee employee)
     {
         return await _dbContext.Dependents
-                             .Where(d => d.EmployeeId == employee.Id)
-                             .ToListAsync();
+                               .Where(d => d.EmployeeId == employee.Id)
+                               .ToListAsync();
     }
 }

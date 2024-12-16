@@ -16,9 +16,9 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Employee>()
-            .HasMany(e => e.Dependents)
-            .WithOne()
-            .HasForeignKey(d => d.EmployeeId);
+                    .HasMany(e => e.Dependents)
+                    .WithOne()
+                    .HasForeignKey(d => d.EmployeeId);
 
         base.OnModelCreating(modelBuilder);
     }

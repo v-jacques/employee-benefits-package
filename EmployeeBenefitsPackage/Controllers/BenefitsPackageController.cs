@@ -7,12 +7,14 @@ namespace EmployeeBenefitsPackage.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class BenefitsPackageController : Controller
+public class BenefitsPackageController : ControllerBase
 {
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IBenefitsPackageService _benefitsPackageService;
 
-    public BenefitsPackageController(IEmployeeRepository employeeRepository, IBenefitsPackageService benefitsPackageService)
+    public BenefitsPackageController(
+        IEmployeeRepository employeeRepository,
+        IBenefitsPackageService benefitsPackageService)
     {
         _employeeRepository = employeeRepository;
         _benefitsPackageService = benefitsPackageService;
