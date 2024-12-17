@@ -29,9 +29,9 @@ Request body:
 Response body:
 ```
 {
+	"dependents": [],
 	"id": 1,
-	"name": "Vinicius",
-	"dependents": null
+	"name": "Vinicius"
 }
 ```
 
@@ -48,8 +48,8 @@ Request body:
 Response body:
 ```
 {
-	"id": 1,
 	"employeeId": 1,
+	"id": 1,
 	"name": "Jacques"
 }
 ```
@@ -60,15 +60,15 @@ Response body:
 ```
 {
 	"employee": {
-		"id": 1,
-		"name": "Vinicius",
 		"dependents": [
 			{
-				"id": 1,
 				"employeeId": 1,
+				"id": 1,
 				"name": "Jacques"
 			}
 		]
+		"id": 1,
+		"name": "Vinicius",
 	},
 	"totalBenefitsCost": 1500,
 	"salary": 52000,

@@ -9,12 +9,40 @@ public interface IBenefitsPackageService
 
 public class BenefitsPackageService : IBenefitsPackageService
 {
+    public Func<Employee, double> EmployeeCostCalculator { get; set; }
+    public Func<Dependent, double> DependentCostCalculator { get; set; }
+    public Func<Person, bool> DiscountEligibilityChecker { get; set; }
+    public Func<Person, double> DiscountValueProvider { get; set; }
+    public Func<Employee, double> PaycheckValueProvider { get; set; }
+    public Func<Employee, int> PaychecksPerYearProvider { get; set; }
+
+    public BenefitsPackageService()
+    {
+        EmployeeCostCalculator = employee => 1000;
+        DependentCostCalculator = dependent => 500;
+        DiscountEligibilityChecker = person => person.Name.ToUpper().StartsWith('A');
+        DiscountValueProvider = person => 0.9;
+        PaycheckValueProvider = employee => 2000.0;
+        PaychecksPerYearProvider = employee => 26;
+    }
+
     public BenefitsPackage CalculateBenefitsPackage(Employee employee)
     {
-        const double paycheckValue = 2000;
-        const int paychecksPerYear = 26;
+        var paycheckValue = PaycheckValueProvider(employee);
+        var paychecksPerYear = PaychecksPerYearProvider(employee);
 
-        var totalBenefitsCost = CalculateBenefitsPackageCost(employee);
+        var dependentsCost = employee.Dependents.Sum(dependent =>
+            DiscountEligibilityChecker(dependent)
+                ? DependentCostCalculator(dependent) * DiscountValueProvider(dependent)
+                : DependentCostCalculator(dependent));
+
+        var employeeCost =
+            DiscountEligibilityChecker(employee)
+                ? EmployeeCostCalculator(employee) * DiscountValueProvider(employee)
+                : EmployeeCostCalculator(employee);
+
+        var totalBenefitsCost = dependentsCost + employeeCost;
+
         var baseSalary = paycheckValue * paychecksPerYear;
         var discountedSalary = baseSalary - totalBenefitsCost;
         var discountedPaycheck = discountedSalary / paychecksPerYear;
@@ -28,31 +56,5 @@ public class BenefitsPackageService : IBenefitsPackageService
             BasePaycheck = paycheckValue,
             DiscountedPaycheck = discountedPaycheck
         };
-    }
-
-    private static double CalculateBenefitsPackageCost(Employee employee)
-    {
-        const double baseEmployeeCost = 1000;
-        const double baseDependentCost = 500;
-        const double discount = 0.9;
-
-        var dependentsCost = 0.0;
-
-        foreach (var dependent in employee.Dependents)
-            dependentsCost += HasNameDiscount(dependent.Name)
-                ? baseDependentCost * discount
-                : baseDependentCost;
-
-        var employeeCost =
-            HasNameDiscount(employee.Name)
-                ? baseEmployeeCost * discount
-                : baseEmployeeCost;
-
-        return dependentsCost + employeeCost;
-    }
-
-    private static bool HasNameDiscount(string name)
-    {
-        return name.ToUpper().StartsWith('A');
     }
 }

@@ -1,13 +1,6 @@
-﻿using Swashbuckle.AspNetCore.Annotations;
+﻿namespace EmployeeBenefitsPackage.Models;
 
-namespace EmployeeBenefitsPackage.Models;
-
-public class Dependent
+public class Dependent : Person
 {
-    [SwaggerSchema(ReadOnly = true)]
-    public int Id { get; set; }
-    
-    public required string Name { get; set; }
-
     public int EmployeeId { get; set; }
 }

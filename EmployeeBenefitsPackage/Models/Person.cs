@@ -2,8 +2,10 @@
 
 namespace EmployeeBenefitsPackage.Models;
 
-public class Employee : Person
+public class Person
 {
     [SwaggerSchema(ReadOnly = true)]
-    public ICollection<Dependent> Dependents { get; set; } = [];
+    public int Id { get; set; }
+
+    public required string Name { get; set; }
 }
