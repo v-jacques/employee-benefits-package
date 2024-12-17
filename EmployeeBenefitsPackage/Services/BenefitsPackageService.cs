@@ -18,8 +18,8 @@ public class BenefitsPackageService : IBenefitsPackageService
 
     public BenefitsPackageService()
     {
-        EmployeeCostCalculator = employee => 1000;
-        DependentCostCalculator = dependent => 500;
+        EmployeeCostCalculator = employee => 1000.0;
+        DependentCostCalculator = dependent => 500.0;
         DiscountEligibilityChecker = person => person.Name.ToUpper().StartsWith('A');
         DiscountValueProvider = person => 0.9;
         PaycheckValueProvider = employee => 2000.0;
