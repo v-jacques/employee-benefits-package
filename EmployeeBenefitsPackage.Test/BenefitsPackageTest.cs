@@ -13,7 +13,7 @@ public class BenefitsPackageTest
     }
 
     [Fact]
-    public void CalculateBenefitsPackage_EmployeeWithNoDependents()
+    public void CalculateBenefitsPackage_EmployeeOnly()
     {
         var employee = new Employee
         {
@@ -51,6 +51,24 @@ public class BenefitsPackageTest
         Assert.Equal(50500.0, benefitsCost.DiscountedSalary);
         Assert.Equal(2000.0, benefitsCost.BasePaycheck);
         Assert.Equal(1942.3076923076924, benefitsCost.DiscountedPaycheck);
+    }
+
+    [Fact]
+    public void CalculateBenefitsPackage_EmployeeWithDiscount()
+    {
+        var employee = new Employee
+        {
+            Name = "AVinicius",
+            Dependents = []
+        };
+
+        var benefitsCost = _benefitsPackageService.CalculateBenefitsPackage(employee);
+
+        Assert.Equal(900.0, benefitsCost.TotalBenefitsCost);
+        Assert.Equal(52000.0, benefitsCost.Salary);
+        Assert.Equal(51100.0, benefitsCost.DiscountedSalary);
+        Assert.Equal(2000.0, benefitsCost.BasePaycheck);
+        Assert.Equal(1965.3846153846155, benefitsCost.DiscountedPaycheck);
     }
 
     [Fact]

@@ -16,16 +16,21 @@ public class EmployeeController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Employee>> AddEmployee(Employee employee)
+    public async Task<ActionResult<Employee>> AddEmployee([FromBody]Employee employee)
     {
         var emp = await _employeeRepository.AddEmployee(employee);
 
-        return emp;
+        return Ok(emp);
     }
 
     [HttpGet]
-    public async Task<ActionResult<Employee>> GetEmployee(int id)
+    public async Task<ActionResult<Employee>> GetEmployee([FromQuery]int id)
     {
-        return await _employeeRepository.GetEmployee(id);
+        var employee = await _employeeRepository.GetEmployee(id);
+
+        if (employee is null)
+            return NotFound($"Employee with ID {id} not found.");
+
+        return Ok(employee);
     }
 }

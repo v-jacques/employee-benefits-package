@@ -6,7 +6,7 @@ namespace EmployeeBenefitsPackage.Repositories;
 public interface IEmployeeRepository
 {
     Task<Employee> AddEmployee(Employee employee);
-    Task<Employee> GetEmployee(int id);
+    Task<Employee?> GetEmployee(int id);
 }
 
 public class EmployeeRepository : IEmployeeRepository
@@ -26,10 +26,10 @@ public class EmployeeRepository : IEmployeeRepository
         return emp.Entity;
     }
 
-    public async Task<Employee> GetEmployee(int employeeId)
+    public async Task<Employee?> GetEmployee(int employeeId)
     {
         return await _dbContext.Employees
                                .Include(e => e.Dependents)
-                               .SingleAsync(e => e.Id == employeeId);
+                               .SingleOrDefaultAsync(e => e.Id == employeeId);
     }
 }

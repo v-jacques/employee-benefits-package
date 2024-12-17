@@ -12,12 +12,12 @@ public class BenefitsPackageService : IBenefitsPackageService
     public BenefitsPackage CalculateBenefitsPackage(Employee employee)
     {
         const double paycheckValue = 2000;
-        const int paychecksYear = 26;
+        const int paychecksPerYear = 26;
 
         var totalBenefitsCost = CalculateBenefitsPackageCost(employee);
-        var baseSalary = paycheckValue * paychecksYear;
+        var baseSalary = paycheckValue * paychecksPerYear;
         var discountedSalary = baseSalary - totalBenefitsCost;
-        var discountedPaycheck = discountedSalary / paychecksYear;
+        var discountedPaycheck = discountedSalary / paychecksPerYear;
 
         return new BenefitsPackage
         {

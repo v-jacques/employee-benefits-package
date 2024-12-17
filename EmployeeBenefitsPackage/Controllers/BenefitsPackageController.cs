@@ -21,10 +21,15 @@ public class BenefitsPackageController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<BenefitsPackage>> GetBenefitsPackage(int employeeId)
+    public async Task<ActionResult<BenefitsPackage>> GetBenefitsPackage([FromQuery]int employeeId)
     {
         var employee = await _employeeRepository.GetEmployee(employeeId);
 
-        return _benefitsPackageService.CalculateBenefitsPackage(employee);
+        if (employee is null)
+            return NotFound($"Employee with ID {employeeId} not found.");
+
+        var benefitsPackage = _benefitsPackageService.CalculateBenefitsPackage(employee);
+
+        return Ok(benefitsPackage);
     }
 }
